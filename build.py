@@ -111,8 +111,12 @@ def main():
 
     # ---- 記事の読み込み ----
     articles = []
+    drafts = 0
     for f in sorted((ROOT / "articles").glob("*.md")):
         a = parse_md_file(f)
+        if a.get("draft", "").lower() in ("true", "yes", "1"):
+            drafts += 1
+            continue
         for key in ("title", "date", "category", "description"):
             if key not in a:
                 raise ValueError(f"{f.name}: frontmatterに {key} がありません")
@@ -270,7 +274,7 @@ def main():
         jsonld_blocks=[],
     ), encoding="utf-8")
 
-    print(f"OK: articles={len(articles)} categories={len(categories)} "
+    print(f"OK: articles={len(articles)} drafts_skipped={drafts} categories={len(categories)} "
           f"pages={len(list((ROOT / 'pages').glob('*.md')))} -> dist/")
 
 
