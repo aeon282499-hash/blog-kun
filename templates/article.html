@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="{{ u('/') }}">ホーム</a> &rsaquo;
+    <a href="{{ article.category_url }}">{{ article.category }}</a> &rsaquo;
+    <span>{{ article.title }}</span>
+  </nav>
+
+  <header class="article-header">
+    <p class="card-meta">
+      <time datetime="{{ article.date }}">{{ article.date }}</time>
+      <a class="category-badge" href="{{ article.category_url }}">{{ article.category }}</a>
+    </p>
+    <h1>{{ article.title }}</h1>
+    {% if article.tags %}
+    <p class="tags">{% for t in article.tags %}<span class="tag">#{{ t }}</span> {% endfor %}</p>
+    {% endif %}
+  </header>
+
+  <p class="ad-disclosure">{{ ad_disclosure }}</p>
+
+  {{ toc_html | safe }}
+
+  <div class="article-body">
+    {{ body_html | safe }}
+  </div>
+</article>
+
+{% if related %}
+<section class="related">
+  <h2 class="section-title">関連記事</h2>
+  {% for r in related %}
+  <article class="card">
+    <p class="card-meta">
+      <time datetime="{{ r.date }}">{{ r.date }}</time>
+      <a class="category-badge" href="{{ r.category_url }}">{{ r.category }}</a>
+    </p>
+    <h3 class="card-title"><a href="{{ r.url }}">{{ r.title }}</a></h3>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}
+{% endblock %}

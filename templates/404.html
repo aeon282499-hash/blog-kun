@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <header class="article-header">
+    <h1>ページが見つかりません</h1>
+  </header>
+  <div class="article-body">
+    <p>お探しのページは移動または削除された可能性があります。</p>
+    <p><a href="{{ u('/') }}">トップページへ戻る</a></p>
+  </div>
+</article>
+{% endblock %}

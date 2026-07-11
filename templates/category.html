@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <a href="{{ u('/') }}">ホーム</a> &rsaquo; <span>{{ category }}</span>
+</nav>
+
+<h1 class="section-title">「{{ category }}」の記事一覧</h1>
+
+<section class="article-list">
+  {% for a in articles %}
+  <article class="card">
+    <p class="card-meta"><time datetime="{{ a.date }}">{{ a.date }}</time></p>
+    <h2 class="card-title"><a href="{{ a.url }}">{{ a.title }}</a></h2>
+    <p class="card-desc">{{ a.description }}</p>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

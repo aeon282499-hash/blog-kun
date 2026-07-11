@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_description }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="{{ u('/static/style.css') }}">
+{% for block in jsonld_blocks %}
+<script type="application/ld+json">{{ block | safe }}</script>
+{% endfor %}
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <p class="site-title"><a href="{{ u('/') }}">{{ site.name }}</a></p>
+    <p class="site-tagline">{{ site.tagline }}</p>
+    <nav class="site-nav">
+      <a href="{{ u('/') }}">ホーム</a>
+      <a href="{{ u('/profile/') }}">プロフィール</a>
+      <a href="{{ u('/contact/') }}">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <nav class="footer-nav">
+      <a href="{{ u('/profile/') }}">プロフィール</a>
+      <a href="{{ u('/privacy/') }}">プライバシーポリシー</a>
+      <a href="{{ u('/contact/') }}">お問い合わせ</a>
+    </nav>
+    <p class="copyright">&copy; {{ current_year }} {{ site.name }}</p>
+  </div>
+</footer>
+</body>
+</html>
